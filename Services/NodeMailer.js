@@ -23,7 +23,7 @@ export const forgetPassword = async (req, res) => {
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
 
-    const resetLink = `https://zenclass-passwordresetflowbackend.onrender.com/reset-password/${user._id}/${token}`;
+    const resetLink = `https://password-update.netlify.app/reset-password/${user._id}/${token}`;
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: email,
