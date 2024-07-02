@@ -1,5 +1,5 @@
 import express from "express"
-import {getUser, loginUser, registerUser, resetPassword } from "../Controllers/UserController.js";
+import {getUser, loginUser, registerUser, resetPassword } from "../Controllers/userController.js";
 import authMiddleware from "../Middleware/AuthMiddleware.js";
 import { forgetPassword } from "../Services/NodeMailer.js";
 
