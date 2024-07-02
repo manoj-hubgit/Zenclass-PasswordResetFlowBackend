@@ -9,13 +9,16 @@ dotenv.config();
 export const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    if(!email){
-      const hashpassword = await bcrypt.hash(password, 10);
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "Email is already registered" });
+    }
+
+    const hashpassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashpassword });
     await newUser.save();
     res.status(200).json({ message: "Registered successfully", result: newUser });
-    }
-    res.status(400).json({ message: "Email is already registered" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error in registration" });
   }
